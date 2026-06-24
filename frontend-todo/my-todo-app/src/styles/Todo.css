@@ -1,0 +1,133 @@
+/* Page */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Main Container */
+
+.todo-container {
+  width: 1400px;
+  margin: 40px auto;
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+
+.todo-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-section input {
+  flex: 1;
+  padding: 10px;
+}
+
+/* .add-btn {
+  
+} */
+
+/* Add Button */
+
+.add-btn {
+  width: 100px;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Todo List */
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+
+/* Todo Item */
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
+/*todo actions*/
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Title */
+
+.todo-item h3 {
+  margin: 0;
+  color: #222;
+}
+
+/* Description */
+
+.todo-item p {
+  color: #666;
+  margin: 10px 0;
+}
+
+/* Edit Button */
+
+.edit-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: darkgreen;
+}
+
+/* Delete Button */
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
