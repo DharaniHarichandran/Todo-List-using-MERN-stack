@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "../styles/Todo.css";
+
+const API_URL = import.meta.env.VITE_SERVER_URL;
+
 function Todo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -15,7 +18,7 @@ function Todo() {
   // GET TODOS
   async function fetchTodos() {
     try {
-      const response = await fetch("http://localhost:3000/todos");
+      const response = await fetch(`${API_URL}/todos`);
 
       const data = await response.json();
 
@@ -31,9 +34,7 @@ function Todo() {
       if (editingId) {
         // UPDATE
 
-        await fetch(
-          `http://localhost:3000/todos/${editingId}`,
-          {
+        await fetch(`${API_URL}/todos/${editingId}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -49,7 +50,7 @@ function Todo() {
       } else {
         // CREATE
 
-        await fetch("http://localhost:3000/todos", {
+        await fetch(`${API_URL}/todos`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -74,7 +75,7 @@ function Todo() {
   async function deleteTodo(id) {
     try {
       await fetch(
-        `http://localhost:3000/todos/${id}`,
+        `${API_URL}/todos/${id}`, 
         {
           method: "DELETE",
         }
