@@ -10,9 +10,10 @@ body {
 /* Main Container */
 
 .todo-container {
-  width: 1300px;
+  max-width: 1300px;
+  width: 95%;
   margin: 40px auto;
-  background-color: white;
+  background-color: #fff;
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
@@ -26,7 +27,8 @@ body {
   margin-bottom: 25px;
 }
 
-/* Inputs */
+/* Input Section */
+
 .input-section {
   display: flex;
   gap: 10px;
@@ -35,12 +37,16 @@ body {
 
 .input-section input {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+  outline: none;
 }
 
-/* .add-btn {
-  
-} */
+.input-section input:focus {
+  border-color: #007bff;
+}
 
 /* Add Button */
 
@@ -53,6 +59,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  transition: 0.3s;
 }
 
 .add-btn:hover {
@@ -73,32 +80,41 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 
   border: 1px solid #ddd;
   padding: 15px;
   margin-bottom: 15px;
-  border-radius: 6px;
+  border-radius: 8px;
   background-color: #fafafa;
 }
 
-/*todo actions*/
-.todo-actions {
-  display: flex;
-  gap: 10px;
+/* Content */
+
+.todo-content {
+  flex: 1;
+  min-width: 0;
 }
 
-/* Title */
-
-.todo-item h3 {
+.todo-content h3 {
   margin: 0;
   color: #222;
 }
 
-/* Description */
-
-.todo-item p {
+.todo-content p {
   color: #666;
-  margin: 10px 0;
+  margin: 8px 0 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Action Buttons */
+
+.todo-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 /* Edit Button */
@@ -107,10 +123,10 @@ body {
   background-color: green;
   color: white;
   border: none;
-  padding: 8px 12px;
-  margin-right: 10px;
+  padding: 8px 14px;
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .edit-btn:hover {
@@ -123,11 +139,34 @@ body {
   background-color: red;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .delete-btn:hover {
   background-color: darkred;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 768px) {
+  .input-section {
+    flex-direction: column;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .todo-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }

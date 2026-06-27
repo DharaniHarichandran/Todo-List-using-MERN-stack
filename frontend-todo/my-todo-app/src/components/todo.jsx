@@ -1,8 +1,8 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Todo.css";
 
-const API_URL = import.meta.env.VITE_SERVER_URL;
+// Temporary: hardcode backend URL
+const API_URL = "http://localhost:3000";
 
 function Todo() {
   const [title, setTitle] = useState("");
@@ -10,46 +10,46 @@ function Todo() {
   const [todos, setTodos] = useState([]);
   const [editingId, setEditingId] = useState(null);
 
-  // Fetch todos when page loads
   useEffect(() => {
     fetchTodos();
   }, []);
 
-  // GET TODOS
   async function fetchTodos() {
     try {
       const response = await fetch(`${API_URL}/todos`);
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+      }
 
+      const data = await response.json();
       setTodos(data);
     } catch (error) {
-      console.log(error);
+      console.error("Fetch Error:", error);
     }
   }
 
-  // ADD OR UPDATE TODO
   async function addHandler() {
     try {
-      if (editingId) {
-        // UPDATE
+      if (!title.trim()) {
+        alert("Title is required");
+        return;
+      }
 
+      if (editingId) {
         await fetch(`${API_URL}/todos/${editingId}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              title,
-              description,
-            }),
-          }
-        );
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            description,
+          }),
+        });
 
         setEditingId(null);
       } else {
-        // CREATE
-
         await fetch(`${API_URL}/todos`, {
           method: "POST",
           headers: {
@@ -67,27 +67,22 @@ function Todo() {
 
       fetchTodos();
     } catch (error) {
-      console.log(error);
+      console.error("Add/Update Error:", error);
     }
   }
 
-  // DELETE
   async function deleteTodo(id) {
     try {
-      await fetch(
-        `${API_URL}/todos/${id}`, 
-        {
-          method: "DELETE",
-        }
-      );
+      await fetch(`${API_URL}/todos/${id}`, {
+        method: "DELETE",
+      });
 
       fetchTodos();
     } catch (error) {
-      console.log(error);
+      console.error("Delete Error:", error);
     }
   }
 
-  // EDIT
   function editTodo(todo) {
     setTitle(todo.title);
     setDescription(todo.description);
@@ -113,10 +108,7 @@ function Todo() {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <button
-          onClick={addHandler}
-          className="add-btn"
-        >
+        <button onClick={addHandler} className="add-btn">
           {editingId ? "Update" : "Add"}
         </button>
       </div>

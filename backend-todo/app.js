@@ -2,6 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const dns = require('dns');
+
+dns.setServers([
+    '1.1.1.1',
+    '8.8.8.8'
+])
 
 dotenv.config();
 
@@ -77,7 +83,12 @@ app.put("/todos/:id", async (req, res) => {
 // DELETE todo
 app.delete("/todos/:id", async (req, res) => {
     try {
-        await todoModel.findByIdAndDelete(req.params.id);
+        const deletedTodo = await todoModel.findByIdAndDelete(req.params.id);
+        
+        if (!deletedTodo) {
+            return res.status(404).json({ message: "todo not found" });
+        }
+        
         res.status(200).json({ message: "deleted successfully" });
     } catch (err) {
         console.log(err);
