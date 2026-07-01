@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Todo.css";
 
-// Temporary: hardcode backend URL
-const API_URL = "http://localhost:3000";
+const API_URL = import.meta.env.VITE_SERVER_URL;
+
 
 function Todo() {
   const [title, setTitle] = useState("");
