@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/Todo.css";
 
 const API_URL = import.meta.env.VITE_SERVER_URL;
-
+console.log("API_URL =", API_URL);
 
 function Todo() {
   const [title, setTitle] = useState("");
